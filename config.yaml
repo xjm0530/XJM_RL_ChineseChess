@@ -1,0 +1,58 @@
+game:
+  num_games: 80000
+  max_moves: 250
+  time_limit_per_move: 0.05
+  num_processes: 8
+  hash_size: 256
+  games_per_round: 5000
+  batch_size: 200
+  normal_mode:
+    rounds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    time_limit_per_move: 0.05
+    max_moves: 250
+    file_prefix: games
+  high_quality_mode:
+    rounds: [13, 14, 15, 16]
+    time_limit_per_move: 0.2
+    max_moves: 300
+    file_prefix: games_high_quality
+
+imitation:
+  epochs: 50
+  batch_size: 128
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  save_interval: 5
+
+rl:
+  total_timesteps: 2000000
+  learning_rate: 3e-4
+  n_steps: 2048
+  batch_size: 64
+  n_epochs: 10
+  gamma: 0.99
+  gae_lambda: 0.95
+  ent_coef: 0.01
+
+mcts:
+  c_puct: 1.0
+  num_simulations: 200
+
+paths:
+  games_data: data/games/
+  models: data/models/
+  pikafish: engines/pikafish-avxvnni.exe
+
+rewards:
+  pawn: 1.0
+  pawn_crossed: 2.0
+  advisor: 2.0
+  elephant: 2.0
+  knight: 4.0
+  cannon: 4.5
+  rook: 9.0
+  king: 1000.0
+  repetition_penalty: -50.0
+  early_move_penalty: -0.1
+  late_move_penalty: -0.5
+  early_move_threshold: 50
